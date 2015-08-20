@@ -1,101 +1,81 @@
 <?php
-//as
-/*
- * Author : Developer Dev
- * Subject :  PHP/MySQL and jQuery
- */
-date_default_timezone_set("Asia/Calcutta");
-//print_r($_POST);
-//exit;
-$DBH = new PDO('mysql:host=localhost;dbname=mapicosi_onlymeatdev', 'mapicosi_onlypro', 'LNS0C{59m2w(');
-/* $DBH = new PDO('mysql:host=localhost;dbname=mapicosi_meatdb', 'root', ''); */
-$DBH->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$userType = $_POST['userType'];
-$paym = $_POST['paym'];
-$deliveryType = $_POST['deliveryType'];
-$add1 = $_POST['add1'];
-$add2 = $_POST['add2'];
-$area = $_POST['area'];
-$landmark = $_POST['landmark'];
-$zipcode = $_POST['zipcode'];
-$city = $_POST['city'];
+
+include('scripts.php');
+
+//get posted data
+$userType = \Helpers\Request::post('userType');
+$paym = \Helpers\Request::post('paym');
+$deliveryType = \Helpers\Request::post('deliveryType');
+$add1 = \Helpers\Request::post('add1');
+$add2 = \Helpers\Request::post('add2');
+$area = \Helpers\Request::post('area');
+$landmark = \Helpers\Request::post('landmark');
+$zipcode = \Helpers\Request::post('zipcode');
+$city = \Helpers\Request::post('city');
 $sts_flg = "0";
 $cre_ts = date('Y-m-d H:i:s');
-$delivery_address = $_POST['add1'] . "," . $_POST['add2'] . "," . $_POST['landmark'] . "," . $_POST['area'] . "," . $_POST['city'] . "," . $_POST['zipcode'];
+$delivery_address = \Helpers\Request::post('add1') . "," . \Helpers\Request::post('add2') . "," . \Helpers\Request::post('landmark') . "," . \Helpers\Request::post('area') . "," . \Helpers\Request::post('city') . "," . \Helpers\Request::post('zipcode');
+
+
+//get the configurations
+$config = new DbModels\ConfigurationMaster;
+$customersDb = new DbModels\Customers();
+
+
+
+$list = $config->getConfigSettings();
+
+//if new user, 
 if ($userType == "New User") {
 
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
+    $first_name = \Helpers\Request::post('first_name');
+    $last_name = \Helpers\Request::post('last_name');
     $name = $first_name;
-    $email = $_POST['email'];
-    $mobile_number = $_POST['mobile_number1'];
+    $email = \Helpers\Request::post('email');
+    $mobile_number = \Helpers\Request::post('mobile_number1');
 } else {
-    $mobile_number = $_POST['mobile_number'];
-    $custId = $_POST["ccode"];
-    $name = $_POST['first_name'];
-    $email = $_POST['email'];
+    $mobile_number = \Helpers\Request::post('mobile_number');
+    $custId = \Helpers\Request::post("ccode");
+    $name = \Helpers\Request::post('first_name');
+    $email = \Helpers\Request::post('email');
 }
+
+    $customerDetails = array(
+        'first_name' => \Helpers\Requestpost('first_name'),
+        'last_name' => \Helpers\Requestpost('last_name'),
+        'mobile_number' => \Helpers\Requestpost('mobile_number1'),
+        'email' => \Helpers\Requestpost('email'),
+        'address_1' => \Helpers\Requestpost('add1'),
+        'address_2' => \Helpers\Requestpost('add2'),
+        'area' => \Helpers\Requestpost('area'),
+        'landmark' => \Helpers\Requestpost('landmark'),
+        'city' => \Helpers\Requestpost('city'),
+        'post_code' => \Helpers\Requestpost('zipcode'),
+        'sts_flg' => $sts_flg,
+        'cre_ts' => $cre_ts,
+        'cust_code' => $custId,
+        'add1' => \Helpers\Requestpost('add1'),
+        'add2' => \Helpers\Requestpost('add2'),
+        'area' => \Helpers\Requestpost('area'),
+        'landmark' => \Helpers\Requestpost('landmark'),
+        'city' => \Helpers\Requestpost('city'),
+        'zipcode' => \Helpers\Requestpost('zipcode'),
+        'cre_ts' => $cre_ts,
+    );
+if ($userType == "New User") {
+    $customersDb->addNewCustomer($customerDetails);
+} else {
+    $customersDb->updateCustomerDetails($customerDetails);
+}
+
+
+
+
+
+
 # connect to the database
 try {
-    $sql = "SELECT * FROM config_master  LIMIT 0, 1";
-    $query = $DBH->prepare($sql);
-    $query->execute();
-    $list = $query->fetchAll();
-    //$DBH->beginTransaction();
-    # SQL
-    if ($userType == "New User") {
-        $custdet = "INSERT INTO customer(first_name,last_name,mobile_number,email,address_1,address_2,area,landmark,city,post_code,sts_flg,cre_ts) VALUES (:first_name,:last_name,:mobile_number,:email,:address_1,:address_2,:area,:landmark,:city,:post_code,:sts_flg,:cre_ts)";
 
-        $custaddr = "INSERT INTO customer_address(cust_code,add1,add2,area,landmark,city,zipcode,cre_ts) VALUES (:cust_code,:add1,:add2,:area,:landmark,:city,:zipcode,:cre_ts)";
-
-        
-        
-        
-        $stmt1 = $DBH->prepare($custdet);
-        $stmt2 = $DBH->prepare($custaddr);
-
-        # custdet
-        /*         * * bind the parameters ** */
-        $stmt1->bindParam(':first_name', $_POST['first_name'], PDO::PARAM_STR);
-        $stmt1->bindParam(':last_name', $_POST['last_name'], PDO::PARAM_STR);
-        $stmt1->bindParam(':mobile_number', $_POST['mobile_number1'], PDO::PARAM_STR);
-        $stmt1->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
-        $stmt1->bindParam(':address_1', $_POST['add1'], PDO::PARAM_STR);
-        $stmt1->bindParam(':address_2', $_POST['add2'], PDO::PARAM_STR);
-        $stmt1->bindParam(':area', $_POST['area'], PDO::PARAM_STR);
-        $stmt1->bindParam(':landmark', $_POST['landmark'], PDO::PARAM_STR);
-        $stmt1->bindParam(':city', $_POST['city'], PDO::PARAM_STR);
-        $stmt1->bindParam(':post_code', $_POST['zipcode'], PDO::PARAM_STR);
-        $stmt1->bindParam(':sts_flg', $sts_flg, PDO::PARAM_STR);
-        $stmt1->bindParam(':cre_ts', $cre_ts, PDO::PARAM_STR);
-
-
-        /*         * * execute the prepared statement ** */
-        $stmt1->execute();
-        $custId = $DBH->lastInsertId();
-        //print_r($custId);
-        # custaddr
-        /*         * * bind the parameters ** */
-
-        //foreach($stocks as $stock)
-        //{
-        $stmt2->bindParam(':cust_code', $custId, PDO::PARAM_STR);
-        $stmt2->bindParam(':add1', $_POST['add1'], PDO::PARAM_STR);
-        $stmt2->bindParam(':add2', $_POST['add2'], PDO::PARAM_STR);
-        $stmt2->bindParam(':area', $_POST['area'], PDO::PARAM_STR);
-        $stmt2->bindParam(':landmark', $_POST['landmark'], PDO::PARAM_STR);
-        $stmt2->bindParam(':city', $_POST['city'], PDO::PARAM_STR);
-        $stmt2->bindParam(':zipcode', $_POST['zipcode'], PDO::PARAM_STR);
-        $stmt2->bindParam(':cre_ts', $cre_ts, PDO::PARAM_STR);
-        /*         * * execute the prepared statement ** */
-        $stmt2->execute();
-        $custaddId = $DBH->lastInsertId();
-        //print_r($custaddId);
-    } else {
-        $custaddr = "UPDATE customer_address SET add1='$add1',add2='$add2', area='$area', landmark='$landmark', city='$city',zipcode='$zipcode',cre_ts='$cre_ts' WHERE cust_code='$custId' ";
-        $stmt2 = $DBH->prepare($custaddr);
-        $stmt2->execute();
-    }
     $orderheader = "INSERT INTO order_headers(cust_code,order_value,order_status,payment_type,delivery_date,delivery_address,order_datetime,sub_total,vat_percent,vat_amount,delivery_charge,delivery_time,grand_total,cre_ts) VALUES (:cust_code,:order_value,:order_status,:payment_type,:delivery_date,:delivery_address,:order_datetime,:sub_total,:vat_percent,:vat_amount,:delivery_charge,:delivery_time,:grand_total,:cre_ts)";
     $orderdetail = "INSERT INTO order_details(cust_code,order_number,product_code,quantity,price,sub_total,cre_ts) VALUES (:cust_code,:order_number,:product_code,:quantity,:price,:sub_total,:cre_ts)";
     /*     * * prepare the SQL statement ** */
@@ -105,28 +85,28 @@ try {
     /*     * * bind the parameters ** */
     //foreach($prices as $price)
     //{
-    $orderTotal = $_POST['orderTotal'];
+    $orderTotal = \Helpers\Request::post('orderTotal'];
     $vatPercent = $list[0]['VAT'];
     //$delivery_charge =$list[0]['delivery_chrg'];
-    $delivery_charge = $_POST['delivery_charge'];
-    $delivery_time = $_POST['delivery_time'];
-    $deliveryType = $_POST['deliveryType'];
+    $delivery_charge = \Helpers\Request::post('delivery_charge'];
+    $delivery_time = \Helpers\Request::post('delivery_time'];
+    $deliveryType = \Helpers\Request::post('deliveryType'];
     print_r($deliveryType);
     if (deliveryType == "2") {
-        $delivery_time = $_POST['delivery_time'];
-        $delivery_date = $_POST['delivery_date'];
+        $delivery_time = \Helpers\Request::post('delivery_time'];
+        $delivery_date = \Helpers\Request::post('delivery_date'];
     } else {
         $delivery_date = date("Y-m-d");
         $delivery_time = date('H:i:s', (time() + (2 * 60 * 60)));
     };
     //$newdelivery_date= date("Y-m-d");					
     //$delivery_time1= date('H:i:s', (time()+(2*60*60)));
-    $order_number = $_POST['order_number'];
+    $order_number = \Helpers\Request::post('order_number'];
     $vat_amount = ($list[0]['VAT'] / 100) * $orderTotal;
     $grand_total = $orderTotal + $delivery_charge + $vat_amount;
     $tot = $orderTotal + $delivery_charge;
     $status = "Pending";
-    $p_type = $_POST['paym'];
+    $p_type = \Helpers\Request::post('paym'];
     $stmt3->bindParam(':order_value', $orderTotal, PDO::PARAM_STR);
     $stmt3->bindParam(':cust_code', $custId, PDO::PARAM_STR);
     $stmt3->bindParam(':order_status', $status, PDO::PARAM_STR);
@@ -148,10 +128,10 @@ try {
     //}
     # orderdetail
     /*     * * bind the parameters ** */
-    $products = substr($_POST['products'], 1);
-    $qtys = substr($_POST['qtys'], 1);
-    $prices = substr($_POST['prices'], 1);
-    $totalPrices = substr($_POST['totalPrices'], 1);
+    $products = substr(\Helpers\Request::post('products'], 1);
+    $qtys = substr(\Helpers\Request::post('qtys'], 1);
+    $prices = substr(\Helpers\Request::post('prices'], 1);
+    $totalPrices = substr(\Helpers\Request::post('totalPrices'], 1);
     $products = explode(",", $products);
     $qtys = explode(",", $qtys);
     $prices = explode(",", $prices);
@@ -395,14 +375,14 @@ try {
 					  <tr>
 						<td width="31%"><strong>' . $name . '</strong></td>
 						<td width="6%"><strong>:</strong></td>
-						<td width="63%"><strong>' . $_POST['mobile_number1'] . '</strong></td>
+						<td width="63%"><strong>' . \Helpers\Request::post('mobile_number1'] . '</strong></td>
 					  </tr>
 					  <tr>
 						<td colspan="3">
 					   ' . $delivery_address . '</td>
 					  </tr>
 					  <tr>
-						<td colspan="3"><strong>Scheduled Delivery : ' . $_POST['delivery_date'] . ' - ' . $delivery_time . '</strong></td>
+						<td colspan="3"><strong>Scheduled Delivery : ' . \Helpers\Request::post('delivery_date'] . ' - ' . $delivery_time . '</strong></td>
 					  </tr>
 				  </table>
 				</div>

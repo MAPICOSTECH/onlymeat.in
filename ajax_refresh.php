@@ -1,51 +1,21 @@
 <?php
 
-/*
+include('scripts.php');
 
-* Author : Developer Dev
+$customersDb = new \DbModels\Customers();
 
-* Subject :  PHP/MySQL and jQuery
+$customerDetails = $customersDb->getCustomerDetails(\Helpers\Request::post('mobile_number'));
 
-*/
-
-
-
-// PDO connect *********
-date_default_timezone_set("Asia/Calcutta");
-function connect() {
-
-    return new PDO('mysql:host=localhost;dbname=mapicosi_onlymeatdev', 'mapicosi_onlypro', 'LNS0C{59m2w(', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-
-}
-
-
-
-$pdo = connect();
-
-$mobile_number = $_POST['mobile_number'];
-
-$sql = "SELECT * FROM customer WHERE mobile_number = $mobile_number limit 1 ";
-
-$query = $pdo->prepare($sql);
-
-$query->execute();
-
-$list = $query->fetchAll();
-
-//print_r($list);
-
-foreach ($list as $rs) 
-
-{
-
-	$msg = '<h1  style="font-size:25px; color:#0C3; font-weight:bold;">Welcome '.$rs["first_name"].'</h1>';
-
-	$output = array("msg"=>$msg,"cust_code"=>$rs["cust_code"],"first_name"=>$rs["first_name"], "address_1"=>$rs["address_1"],"email"=>$rs["email"],"mobile_number"=>$rs["mobile_number"],"address_2"=>$rs["address_2"],"landmark"=>$rs["landmark"],"city"=>$rs["city"],"post_code"=>$rs["post_code"]);
-
-	
-
-}
-
+$output = [
+    'msg' => '<h1  style="font-size:25px; color:#0C3; font-weight:bold;">Welcome ' . $customerDetails[0]["first_name"] . '</h1>',
+    "cust_code" => $customerDetails[0]["cust_code"],
+    "first_name" => $customerDetails[0]["first_name"],
+    "address_1" => $customerDetails[0]["address_1"],
+    "email" => $customerDetails[0]["email"],
+    "mobile_number" => $customerDetails[0]["mobile_number"],
+    "address_2" => $customerDetails[0]["address_2"],
+    "landmark" => $customerDetails[0]["landmark"],
+    "city" => $customerDetails[0]["city"],
+    "post_code" => $customerDetails[0]["post_code"]
+];
 echo json_encode($output);
-
-?>

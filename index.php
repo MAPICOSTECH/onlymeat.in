@@ -160,7 +160,7 @@ include('inc/index.inc.php');
 
                                         <div class="date">
                                             <div class="styled-select">
-                                                <input type="text" name="delivery_date" id="delivery_date"  placeholder="Delivery Date" class="ccformfield" value="<?php //echo date('m/d/Y');         ?>">
+                                                <input type="text" name="delivery_date" id="delivery_date"  placeholder="Delivery Date" class="ccformfield" value="<?php //echo date('m/d/Y');          ?>">
 
                                             </div>
                                             <div class="styled-select">
