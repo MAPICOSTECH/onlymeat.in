@@ -44,47 +44,9 @@ try {
     //$DBH->beginTransaction();
     # SQL
     if ($userType == "New User") {
-        $custdet = "INSERT INTO customer(first_name,last_name,mobile_number,email,address_1,address_2,area,landmark,city,post_code,
-				sts_flg,
-				cre_ts
-				) VALUES (
-				:first_name,
-				:last_name,
-				:mobile_number,
-				:email,
-				:address_1,
-				:address_2,
-				
-				:area,
-				
-				:landmark,
-				:city,
-				:post_code,
-				:sts_flg,
-				:cre_ts)";
+        $custdet = "INSERT INTO customer(first_name,last_name,mobile_number,email,address_1,address_2,area,landmark,city,post_code,sts_flg,cre_ts) VALUES (:first_name,:last_name,:mobile_number,:email,:address_1,:address_2,:area,:landmark,:city,:post_code,:sts_flg,:cre_ts)";
 
-        $custaddr = "INSERT INTO customer_address(
-				cust_code,
-				add1,
-				add2,
-				
-				area,
-				
-				landmark,
-				city,
-				zipcode,
-				cre_ts
-				) VALUES (
-				:cust_code,
-				:add1,
-				:add2,
-				
-				:area,
-				
-				:landmark,
-				:city,
-				:zipcode,
-				:cre_ts)";
+        $custaddr = "INSERT INTO customer_address(cust_code,add1,add2,area,landmark,city,zipcode,cre_ts) VALUES (:cust_code,:add1,:add2,:area,:landmark,:city,:zipcode,:cre_ts)";
 
         $stmt1 = $DBH->prepare($custdet);
         $stmt2 = $DBH->prepare($custaddr);
@@ -131,52 +93,8 @@ try {
         $stmt2 = $DBH->prepare($custaddr);
         $stmt2->execute();
     }
-    $orderheader = "INSERT INTO order_headers(
-				cust_code,
-				order_value,
-				order_status,
-				payment_type,
-				delivery_date,
-				delivery_address,
-				order_datetime,
-				sub_total,
-				vat_percent,
-				vat_amount,
-				delivery_charge,
-				delivery_time,
-				grand_total,
-				cre_ts
-				) VALUES (
-				:cust_code,
-				:order_value,
-				:order_status,
-				:payment_type,
-				:delivery_date,
-				:delivery_address,
-				:order_datetime,
-				:sub_total,
-				:vat_percent,
-				:vat_amount,
-				:delivery_charge,
-				:delivery_time,
-				:grand_total,
-				:cre_ts)";
-    $orderdetail = "INSERT INTO order_details(
-				cust_code,
-				order_number,
-				product_code,
-				quantity,
-				price,
-				sub_total,
-				cre_ts
-				) VALUES (
-				:cust_code,
-				:order_number,
-				:product_code,
-				:quantity,
-				:price,
-				:sub_total,
-				:cre_ts)";
+    $orderheader = "INSERT INTO order_headers(cust_code,order_value,order_status,payment_type,delivery_date,delivery_address,order_datetime,sub_total,vat_percent,vat_amount,delivery_charge,delivery_time,grand_total,cre_ts) VALUES (:cust_code,:order_value,:order_status,:payment_type,:delivery_date,:delivery_address,:order_datetime,:sub_total,:vat_percent,:vat_amount,:delivery_charge,:delivery_time,:grand_total,:cre_ts)";
+    $orderdetail = "INSERT INTO order_details(cust_code,order_number,product_code,quantity,price,sub_total,cre_ts) VALUES (:cust_code,:order_number,:product_code,:quantity,:price,:sub_total,:cre_ts)";
     /*     * * prepare the SQL statement ** */
     $stmt3 = $DBH->prepare($orderheader);
     $stmt4 = $DBH->prepare($orderdetail);
