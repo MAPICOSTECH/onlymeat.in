@@ -1,0 +1,82 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+@media only screen and (min-width:768px) and (max-width:979px)
+{
+.container{width: 740px;}
+.product h3{ font-size: 14px;}
+.product_rit_in{height: 96px;padding: 29px 0; width: 96px;}
+.product_rit_in h4{font-size: 22.2px;}
+.product_rit_in p{ font-size: 9.99px;}
+.product{margin: 0 7px 22px;}
+.from_sec_rit_form input[type="text"]{width: 250px;}
+}
+
+
+@media only screen and (max-width:767px) 
+{
+.container{width: 90%;}
+.product{width: 46%;min-height: 240px;}
+.product_rit_in{height: 116px;padding: 34px 0; width: 116px;}
+.product h3{font-size: 16px;}
+.btn_prt{width: 100%;}
+.btn_prt_rit a{padding: 15px 54px;}
+.btn_prt_lft a{padding: 15px 29px;}
+.from_sec_lft_main{width: 100%; margin: 20px 0;}
+.from_sec__rit{width: 100%;}
+.footer_col{width: 100%; margin:0 0 50px 0;}
+
+}
+
+
+@media only screen and (max-width:639px) 
+{
+.product{margin: 0 0 22px; width: 100%;}
+.product_rit_in{height: 170px;padding: 58px 28px; width: 170px;}
+.product_rit_in h4{font-size: 40.2px;}
+.btn_prt_lft{ width: 100%; margin: 10px 0;}
+.btn_prt_rit{width: 100%; }
+
+.styled-select2{max-width: 297px; margin-right: 0; width: 100%;}
+.styled-select2 select{width: 130%;}
+}
+
+
+
+
+@media only screen and (max-width:479px) 
+{
+.product_rit_in{height: 110px; width: 110px;padding: 29px 0;}
+.product_rit_in h4{font-size: 24.2px;}
+.form_prt_innr h2{   font-size: 20px;line-height: 41px;margin: 0;}
+.from_sec_rit_form input[type="text"]{width: 75%;}
+
+.table_btm h4 span{font: 22px/30px "RupeeForadian";}
+.table_btm h4{  font: 17px/25px "RupeeForadian";padding: 24px 0 0;}
+.table_btm{text-align: left;}
+.styled-select{ width: 80px;margin: 0 10px 0 0;}
+.styled-select select{font-size: 11px;}
+.phone{padding: 10px; width: 158px; margin: 0;}
+.phone p{font: bold 12px/20px "RupeeForadian";}
+
+.styled-select2{width: 75%; margin-right: 0; }
+.styled-select2 select{width: 130%;}
+
+
+
+
+}
+
+
+
+
+@media only screen and (max-width:325px)
+{
+
+}
+
+
+
+
+
