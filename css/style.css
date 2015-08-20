@@ -12,13 +12,13 @@
 
     src: url('zonapro-webfont.eot?#iefix') format('embedded-opentype'),
 
-         url('zonapro-webfont.woff2') format('woff2'),
+        url('zonapro-webfont.woff2') format('woff2'),
 
-         url('zonapro-webfont.woff') format('woff'),
+        url('zonapro-webfont.woff') format('woff'),
 
-         url('zonapro-webfont.ttf') format('truetype'),
+        url('zonapro-webfont.ttf') format('truetype'),
 
-         url('zonapro-webfont.svg#zonaprouploaded_file') format('svg');
+        url('zonapro-webfont.svg#zonaprouploaded_file') format('svg');
 
     font-weight: normal;
 
@@ -56,7 +56,7 @@ section, source,
 
 video {
 
-	display:block;
+    display:block;
 
 }
 
@@ -68,7 +68,7 @@ summary,
 
 time {
 
-	display:inline;
+    display:inline;
 
 }
 
@@ -82,11 +82,11 @@ time {
 
 *:after {
 
-  -webkit-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 
-     -moz-box-sizing: border-box;
+    -moz-box-sizing: border-box;
 
-          box-sizing: border-box;
+    box-sizing: border-box;
 
 }
 
@@ -94,15 +94,15 @@ time {
 
 *{
 
-	margin: 0px;
+    margin: 0px;
 
-	outline: none;
+    outline: none;
 
-	border: none;
+    border: none;
 
-	list-style: none;
+    list-style: none;
 
-	text-decoration: none;
+    text-decoration: none;
 
 }
 
@@ -130,31 +130,31 @@ body{font:normal 14px/18px 'zonaprouploaded_file'; color:#000;background: #e4e4e
 
 .phone{
 
-	width: 184px;
+    width: 184px;
 
-	height: 39px;
+    height: 39px;
 
-	float: right;
+    float: right;
 
-	border: 1px solid #fff;
+    border: 1px solid #fff;
 
-	-webkit-border-radius: 7px;
+    -webkit-border-radius: 7px;
 
-	-moz-border-radius: 7px;
+    -moz-border-radius: 7px;
 
-	border-radius: 7px;
+    border-radius: 7px;
 
-	padding: 10px;
+    padding: 10px;
 
-	text-align: center;
+    text-align: center;
 
-	margin-top: 16px;
+    margin-top: 16px;
 
-	margin-right: 0;
+    margin-right: 0;
 
-	margin-left: 0;
+    margin-left: 0;
 
-	margin-bottom: 16px;
+    margin-bottom: 16px;
 
 }
 
@@ -164,19 +164,19 @@ body{font:normal 14px/18px 'zonaprouploaded_file'; color:#000;background: #e4e4e
 
 .mid_sec{
 
-	width: 100%;
+    width: 100%;
 
-	float: left;
+    float: left;
 
-	text-align: center;
+    text-align: center;
 
-	padding-top: 30px;
+    padding-top: 30px;
 
-	padding-right: 0;
+    padding-right: 0;
 
-	padding-left: 0;
+    padding-left: 0;
 
-	padding-bottom: 30px;
+    padding-bottom: 30px;
 
 }
 
@@ -184,17 +184,17 @@ body{font:normal 14px/18px 'zonaprouploaded_file'; color:#000;background: #e4e4e
 
 .mid_sec_innr h2{
 
-	font-size: 24px;
+    font-size: 24px;
 
-	line-height: 30px;
+    line-height: 30px;
 
-	color: #ff0000;
+    color: #ff0000;
 
-	text-transform: capitalize;
+    text-transform: capitalize;
 
-	font-weight: 700;
+    font-weight: 700;
 
-	padding: 0 0 30px 0;
+    padding: 0 0 30px 0;
 
 }
 
@@ -204,15 +204,15 @@ body{font:normal 14px/18px 'zonaprouploaded_file'; color:#000;background: #e4e4e
 
 .product h3{
 
-	font-size: 18px;
+    font-size: 18px;
 
-	line-height: 50px;
+    line-height: 50px;
 
-	font-weight: 600;
+    font-weight: 600;
 
-	color: #ff0000;
+    color: #ff0000;
 
-	text-transform: capitalize;
+    text-transform: capitalize;
 
 }
 
@@ -224,63 +224,63 @@ body{font:normal 14px/18px 'zonaprouploaded_file'; color:#000;background: #e4e4e
 
 .product_rit_in{
 
-	width: 115px;
+    width: 115px;
 
-	text-align: left;
+    text-align: left;
 
-	float: right;
+    float: right;
 
-	border-radius: 50%;
+    border-radius: 50%;
 
-	background-color: #fff000;
+    background-color: #fff000;
 
-	border: 2px solid #ff0000;
+    border: 2px solid #ff0000;
 
-	height: 115px;
+    height: 115px;
 
-	padding-top: 38px;
+    padding-top: 38px;
 
-	padding-right: 0;
+    padding-right: 0;
 
-	padding-left: 2px;
+    padding-left: 2px;
 
-	padding-bottom: 38px;
+    padding-bottom: 38px;
 
-	margin-top: 0;
+    margin-top: 0;
 
-	margin-right: -15px;
+    margin-right: -15px;
 
-	margin-left: 0;
+    margin-left: 0;
 
-	margin-bottom: 0;
+    margin-bottom: 0;
 
 }
 
 .product_rit_in p{
 
-	font-size: 10.99px;
+    font-size: 10.99px;
 
-	line-height: 12px;
+    line-height: 12px;
 
-	color: #ff0000;
+    color: #ff0000;
 
-	padding: 0 0 5px 9px;
+    padding: 0 0 5px 9px;
 
-	font-weight: 600;
+    font-weight: 600;
 
 }
 
 .product_rit_in h4{
 
-	font-size: 30px;
+    font-size: 30px;
 
-	line-height: 33px;
+    line-height: 33px;
 
-	color: #ff0000;
+    color: #ff0000;
 
-	padding: 0 0 0 13px;
+    padding: 0 0 0 13px;
 
-	font-weight: 500;
+    font-weight: 500;
 
 }
 
@@ -329,31 +329,31 @@ span.spinner > .add { text-align:center; line-height:35px; cursor:pointer;}
 
 input.qtyplus { width:35px; height:37px; background: #fff000; border-left:1px solid #ff0000; color: #ff0000;font-size: 18px;font-weight: 700;float: left;
 
--webkit-border-top-right-radius: 4px;
+                -webkit-border-top-right-radius: 4px;
 
--webkit-border-bottom-right-radius: 4px;
+                -webkit-border-bottom-right-radius: 4px;
 
--moz-border-radius-topright: 4px;
+                -moz-border-radius-topright: 4px;
 
--moz-border-radius-bottomright: 4px;
+                -moz-border-radius-bottomright: 4px;
 
-border-top-right-radius: 4px;
+                border-top-right-radius: 4px;
 
-border-bottom-right-radius: 4px; }
+                border-bottom-right-radius: 4px; }
 
 input.qtyminus {  width:35px; height:37px; background: #fff000; border-right:1px solid #ff0000; color: #ff0000;font-size: 18px;font-weight: 700;float: left;
 
--webkit-border-top-left-radius: 4px;
+                  -webkit-border-top-left-radius: 4px;
 
--webkit-border-bottom-left-radius: 4px;
+                  -webkit-border-bottom-left-radius: 4px;
 
--moz-border-radius-topleft: 4px;
+                  -moz-border-radius-topleft: 4px;
 
--moz-border-radius-bottomleft: 4px;
+                  -moz-border-radius-bottomleft: 4px;
 
-border-top-left-radius: 4px;
+                  border-top-left-radius: 4px;
 
-border-bottom-left-radius: 4px;}
+                  border-bottom-left-radius: 4px;}
 
 .in{width:128px; display: inline-block; }
 
@@ -363,23 +363,23 @@ border-bottom-left-radius: 4px;}
 
 .btn_prt_lft a{
 
-	font-size: 16px;
+    font-size: 16px;
 
-	color: #053636;
+    color: #053636;
 
-	display: inline-block;
+    display: inline-block;
 
-	font-weight: 600;
+    font-weight: 600;
 
-	padding: 15px 40px;
+    padding: 15px 40px;
 
-	border: 2px solid #ee1c24;
+    border: 2px solid #ee1c24;
 
-	-webkit-border-radius: 4px;
+    -webkit-border-radius: 4px;
 
-	-moz-border-radius: 4px;
+    -moz-border-radius: 4px;
 
-	border-radius: 4px;
+    border-radius: 4px;
 
 }
 
@@ -387,25 +387,25 @@ border-bottom-left-radius: 4px;}
 
 .btn_prt_rit a{
 
-	font-size: 16px;
+    font-size: 16px;
 
-	color: #fff;
+    color: #fff;
 
-	display: inline-block;
+    display: inline-block;
 
-	font-weight: 600;
+    font-weight: 600;
 
-	padding: 15px 65px;
+    padding: 15px 65px;
 
-	border: 2px solid #ee1c24;
+    border: 2px solid #ee1c24;
 
-	-webkit-border-radius: 4px;
+    -webkit-border-radius: 4px;
 
-	background: #ee1c24;
+    background: #ee1c24;
 
-	-moz-border-radius: 4px;
+    -moz-border-radius: 4px;
 
-	border-radius: 4px;
+    border-radius: 4px;
 
 }
 
@@ -417,29 +417,29 @@ border-bottom-left-radius: 4px;}
 
 .form_prt_innr h2{
 
-	font-size: 24px;
+    font-size: 24px;
 
-	line-height: 56px;
+    line-height: 56px;
 
-	font-weight: 700;
+    font-weight: 700;
 
-	color: #ff0000;
+    color: #ff0000;
 
-	text-transform: capitalize;
+    text-transform: capitalize;
 
-	border: 2px solid #ee1c24;
+    border: 2px solid #ee1c24;
 
-	-webkit-border-radius: 4px;
+    -webkit-border-radius: 4px;
 
-	-moz-border-radius: 4px;
+    -moz-border-radius: 4px;
 
-	border-radius: 4px;
+    border-radius: 4px;
 
-	padding: 0 20px;
+    padding: 0 20px;
 
-	display: inline-block;
+    display: inline-block;
 
-	margin: 0 0 25px;
+    margin: 0 0 25px;
 
 }
 
@@ -447,17 +447,17 @@ border-bottom-left-radius: 4px;}
 
 .from_sec{
 
-	width: 100%;
+    width: 100%;
 
-	float: left;
+    float: left;
 
-	margin-top: 8px;
+    margin-top: 8px;
 
-	margin-right: 0;
+    margin-right: 0;
 
-	margin-left: 0;
+    margin-left: 0;
 
-	margin-bottom: 25px;
+    margin-bottom: 25px;
 
 }
 
@@ -465,19 +465,19 @@ border-bottom-left-radius: 4px;}
 
 .from_sec_lft{
 
-	width: 100%;
+    width: 100%;
 
-	float: left;
+    float: left;
 
-	background: #fff;
+    background: #fff;
 
-	padding-top: 30px;
+    padding-top: 30px;
 
-	padding-right: 0;
+    padding-right: 0;
 
-	padding-left: 0px;
+    padding-left: 0px;
 
-	padding-bottom: 15px;
+    padding-bottom: 15px;
 
 }
 
@@ -501,17 +501,17 @@ table tr td{font-weight:normal; font-family:'zonaprouploaded_file';color: #58585
 
 .table_last_prt{
 
-	width: 100%;
+    width: 100%;
 
-	float: left;
+    float: left;
 
-	padding-top: 3px;
+    padding-top: 3px;
 
-	padding-right: 0;
+    padding-right: 0;
 
-	padding-left: 0;
+    padding-left: 0;
 
-	padding-bottom: 0;
+    padding-bottom: 0;
 
 }
 
@@ -525,27 +525,27 @@ table tr td{font-weight:normal; font-family:'zonaprouploaded_file';color: #58585
 
 .styled-select select {
 
-   background: transparent;
+    background: transparent;
 
-   width: 130px;
+    width: 130px;
 
-   padding: 0px 0;
+    padding: 0px 0;
 
-   font-size: 16px;
+    font-size: 16px;
 
-   line-height:1;
+    line-height:1;
 
-   border: 0;
+    border: 0;
 
-   border-radius: 0;
+    border-radius: 0;
 
-   height: 21px;
+    height: 21px;
 
-   -webkit-appearance: none;
+    -webkit-appearance: none;
 
-   font-size: 13px; line-height: 13px; font-weight: bold;color: #404040;
+    font-size: 13px; line-height: 13px; font-weight: bold;color: #404040;
 
-   }
+}
 
 
 
@@ -553,23 +553,23 @@ table tr td{font-weight:normal; font-family:'zonaprouploaded_file';color: #58585
 
 .styled-select {
 
-   width: 115px;
+    width: 115px;
 
-   height: 21px;
+    height: 21px;
 
-   overflow: hidden;
+    overflow: hidden;
 
-   background: url(../images/new_arrow.png) no-repeat 100px #fff;
+    background: url(../images/new_arrow.png) no-repeat 100px #fff;
 
-   border: 1px solid #a9a9a9;
+    border: 1px solid #a9a9a9;
 
-   float: left;
+    float: left;
 
-   margin: 0 20px 0 0; 
+    margin: 0 20px 0 0; 
 
-  
 
-   }
+
+}
 
 .from_sec__rit{width: 49%; float: right;background:#fff; border-right:4px solid #e84148;border-top:3px solid #e84148;border-left:1px solid #e84148;border-bottom:2px solid #e84148;}  
 
@@ -583,7 +583,7 @@ table tr td{font-weight:normal; font-family:'zonaprouploaded_file';color: #58585
 
 .from_sec_rit_form input[type="text"]{width:297px; height: 34px;float: left; border: 1px solid #e84148; background: #fff;font-size: 15px;
 
- font-weight: normal;color: #404040; padding: 5px 10px; }
+                                      font-weight: normal;color: #404040; padding: 5px 10px; }
 
 .from_sec_rit_form label{width: auto; float:left;margin: 0 10px 0 0 ;}
 
@@ -591,27 +591,27 @@ table tr td{font-weight:normal; font-family:'zonaprouploaded_file';color: #58585
 
 .styled-select2 select {
 
-   background: transparent;
+    background: transparent;
 
-   width: 255px;
+    width: 255px;
 
-   padding: 0px 0;
+    padding: 0px 0;
 
-   font-size: 16px;
+    font-size: 16px;
 
-   line-height:1;
+    line-height:1;
 
-   border: 0;
+    border: 0;
 
-   border-radius: 0;
+    border-radius: 0;
 
-   height: 21px;
+    height: 21px;
 
-   -webkit-appearance: none;
+    -webkit-appearance: none;
 
-   font-size: 13px; line-height: 13px; font-weight: normal;color: #404040;
+    font-size: 13px; line-height: 13px; font-weight: normal;color: #404040;
 
-   }
+}
 
 
 
@@ -619,23 +619,23 @@ table tr td{font-weight:normal; font-family:'zonaprouploaded_file';color: #58585
 
 .styled-select2 {
 
-   width: 237px;
+    width: 237px;
 
-   height: 21px;
+    height: 21px;
 
-   overflow: hidden;
+    overflow: hidden;
 
-   background: url(../images/new_arrow.png) no-repeat 95% #fff;
+    background: url(../images/new_arrow.png) no-repeat 95% #fff;
 
-   border: 1px solid #a9a9a9;
+    border: 1px solid #a9a9a9;
 
-   float: left;
+    float: left;
 
-   margin: 6px 20px 0 0; 
+    margin: 6px 20px 0 0; 
 
-  
 
-   }
+
+}
 
 .submit_btn{width: 100%; float: left;text-align: left; }
 
@@ -651,33 +651,33 @@ table tr td{font-weight:normal; font-family:'zonaprouploaded_file';color: #58585
 
 .footer_col h3{
 
-	padding-bottom: 0px;
+    padding-bottom: 0px;
 
-	text-align: center;
+    text-align: center;
 
-	color: #fff;
+    color: #fff;
 
-	font-weight: bold;
+    font-weight: bold;
 
-	font-size: 16px;
+    font-size: 16px;
 
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 
 }
 
 .footer_col p{
 
-	font-size: 14px;
+    font-size: 14px;
 
-	color: #FFFFFF;
+    color: #FFFFFF;
 
-	line-height: 22px;
+    line-height: 22px;
 
 }
 
 .footer_col p a{
 
-	color: #FFFFFF;
+    color: #FFFFFF;
 
 }
 
@@ -687,19 +687,104 @@ table tr td{font-weight:normal; font-family:'zonaprouploaded_file';color: #58585
 
 .str_sm{
 
-	width: 100%;
+    width: 100%;
 
-	margin-top: 10px;
+    margin-top: 10px;
 
-	margin-right: 0;
+    margin-right: 0;
 
-	margin-left: 0;
+    margin-left: 0;
 
-	margin-bottom: 0;
+    margin-bottom: 0;
 
-	text-align: center;
+    text-align: center;
 
 }
 
 .str_sm li{display: inline-block; margin: 0 3px;}
 
+input[type="number"] {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+
+    color: #ff0000;
+    float: left;
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 700;
+    height: 35px;
+    outline: medium none;
+    padding: 0;
+    pointer-events: none;
+    text-align: center;
+    text-transform: uppercase;
+    width: 48px;
+}
+span.spinner > .sub{
+    width: 35px;
+
+    background: #fff000;
+    border-right: 1px solid #ff0000;
+    color: #ff0000;
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 700;
+    cursor:pointer;
+    height: 35px;
+    float: left;
+
+
+
+}
+span.spinner > .add {
+    width: 35px;
+    height: 37px;
+    background: #fff000;
+    border-left: 1px solid #ff0000;
+    color: #ff0000;
+    cursor:pointer;
+    font-size: 18px;
+    font-weight: 700;
+    float: left;
+    top: 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+}
+span.spinner {
+    position: absolute;
+    height: 37px;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    background: #fff000;
+
+    color: #ff0000;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+
+sub, .sub {
+    bottom: 0em;
+}
+sub, .sub, sup, .sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+input[type="submit"] {
+    font-size: 18px;
+    color: #fff;
+    display: inline-block;
+    font-weight: 600;
+    padding: 15px 65px;
+    cursor:pointer;
+    border: 2px solid #ee1c24;
+    -webkit-border-radius: 4px;
+    background: #ee1c24;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
