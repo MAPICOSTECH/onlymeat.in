@@ -48,6 +48,9 @@ try {
 
         $custaddr = "INSERT INTO customer_address(cust_code,add1,add2,area,landmark,city,zipcode,cre_ts) VALUES (:cust_code,:add1,:add2,:area,:landmark,:city,:zipcode,:cre_ts)";
 
+        
+        
+        
         $stmt1 = $DBH->prepare($custdet);
         $stmt2 = $DBH->prepare($custaddr);
 
