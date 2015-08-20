@@ -1,22 +1,15 @@
 <?php
-
+//as
 /*
-
-* Author : Developer Dev
-
-* Subject :  PHP/MySQL and jQuery
-
-*/
+ * Author : Developer Dev
+ * Subject :  PHP/MySQL and jQuery
+ */
 date_default_timezone_set("Asia/Calcutta");
 //print_r($_POST);
 //exit;
-
 $DBH = new PDO('mysql:host=localhost;dbname=mapicosi_onlymeatdev', 'mapicosi_onlypro', 'LNS0C{59m2w(');
-
-/*$DBH = new PDO('mysql:host=localhost;dbname=mapicosi_meatdb', 'root', '');*/
-
-$DBH->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-
+/* $DBH = new PDO('mysql:host=localhost;dbname=mapicosi_meatdb', 'root', ''); */
+$DBH->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $userType = $_POST['userType'];
 $paym = $_POST['paym'];
 $deliveryType = $_POST['deliveryType'];
@@ -28,241 +21,117 @@ $zipcode = $_POST['zipcode'];
 $city = $_POST['city'];
 $sts_flg = "0";
 $cre_ts = date('Y-m-d H:i:s');
-$delivery_address = $_POST['add1'].",".$_POST['add2'].",".$_POST['landmark'].",".$_POST['area'].",".$_POST['city'].",".$_POST['zipcode'];
+$delivery_address = $_POST['add1'] . "," . $_POST['add2'] . "," . $_POST['landmark'] . "," . $_POST['area'] . "," . $_POST['city'] . "," . $_POST['zipcode'];
+if ($userType == "New User") {
 
-if( $userType == "New User")
-
-{
-
-
-$first_name = $_POST['first_name'];
-
-$last_name = $_POST['last_name'];
-
-$name =$first_name;
-
-$email = $_POST['email'];
-
-$mobile_number = $_POST['mobile_number1']; 
-
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $name = $first_name;
+    $email = $_POST['email'];
+    $mobile_number = $_POST['mobile_number1'];
+} else {
+    $mobile_number = $_POST['mobile_number'];
+    $custId = $_POST["ccode"];
+    $name = $_POST['first_name'];
+    $email = $_POST['email'];
 }
-
-else 
-
-{
-
-$mobile_number = $_POST['mobile_number'];
-
-$custId =$_POST["ccode"];
-
-$name =$_POST['first_name'];
-
-$email = $_POST['email'];
-
-}
-
-	# connect to the database
-	try {
-		$sql = "SELECT * FROM config_master  LIMIT 0, 1";
-		$query = $DBH->prepare($sql);
-		$query->execute();
-		$list = $query->fetchAll();
-		//$DBH->beginTransaction();
-
-		# SQL
-
-		if( $userType == "New User")
-
-		{
-
-			$custdet = "INSERT INTO customer(
-
-				first_name,
-
-				last_name,
-
-				mobile_number,
-
-				email,
-
-				address_1,
-
-				address_2,
-				
-				area,
-				
-				landmark,
-
-				city,
-
-				post_code,
-
+# connect to the database
+try {
+    $sql = "SELECT * FROM config_master  LIMIT 0, 1";
+    $query = $DBH->prepare($sql);
+    $query->execute();
+    $list = $query->fetchAll();
+    //$DBH->beginTransaction();
+    # SQL
+    if ($userType == "New User") {
+        $custdet = "INSERT INTO customer(first_name,last_name,mobile_number,email,address_1,address_2,area,landmark,city,post_code,
 				sts_flg,
-
 				cre_ts
-
 				) VALUES (
-
 				:first_name,
-
 				:last_name,
-
 				:mobile_number,
-
 				:email,
-
 				:address_1,
-
 				:address_2,
 				
 				:area,
 				
 				:landmark,
-
 				:city,
-
 				:post_code,
-
 				:sts_flg,
-
 				:cre_ts)";
 
-				
-
-				$custaddr = "INSERT INTO customer_address(
-
+        $custaddr = "INSERT INTO customer_address(
 				cust_code,
-
 				add1,
-
 				add2,
 				
 				area,
 				
 				landmark,
-
 				city,
-
 				zipcode,
-
 				cre_ts
-
 				) VALUES (
-
 				:cust_code,
-
 				:add1,
-
 				:add2,
 				
 				:area,
 				
 				:landmark,
-
 				:city,
-
 				:zipcode,
-
 				:cre_ts)";
 
-				
+        $stmt1 = $DBH->prepare($custdet);
+        $stmt2 = $DBH->prepare($custaddr);
 
-			$stmt1 = $DBH->prepare($custdet);
+        # custdet
+        /*         * * bind the parameters ** */
+        $stmt1->bindParam(':first_name', $_POST['first_name'], PDO::PARAM_STR);
+        $stmt1->bindParam(':last_name', $_POST['last_name'], PDO::PARAM_STR);
+        $stmt1->bindParam(':mobile_number', $_POST['mobile_number1'], PDO::PARAM_STR);
+        $stmt1->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
+        $stmt1->bindParam(':address_1', $_POST['add1'], PDO::PARAM_STR);
+        $stmt1->bindParam(':address_2', $_POST['add2'], PDO::PARAM_STR);
+        $stmt1->bindParam(':area', $_POST['area'], PDO::PARAM_STR);
+        $stmt1->bindParam(':landmark', $_POST['landmark'], PDO::PARAM_STR);
+        $stmt1->bindParam(':city', $_POST['city'], PDO::PARAM_STR);
+        $stmt1->bindParam(':post_code', $_POST['zipcode'], PDO::PARAM_STR);
+        $stmt1->bindParam(':sts_flg', $sts_flg, PDO::PARAM_STR);
+        $stmt1->bindParam(':cre_ts', $cre_ts, PDO::PARAM_STR);
 
-			$stmt2 = $DBH->prepare($custaddr);
 
-			
+        /*         * * execute the prepared statement ** */
+        $stmt1->execute();
+        $custId = $DBH->lastInsertId();
+        //print_r($custId);
+        # custaddr
+        /*         * * bind the parameters ** */
 
-				# custdet
-
-			/*** bind the parameters ***/
-
-				$stmt1->bindParam(':first_name', $_POST['first_name'], PDO::PARAM_STR);
-
-				$stmt1->bindParam(':last_name', $_POST['last_name'], PDO::PARAM_STR);
-
-				$stmt1->bindParam(':mobile_number', $_POST['mobile_number1'], PDO::PARAM_STR);
-
-				$stmt1->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
-
-				$stmt1->bindParam(':address_1', $_POST['add1'], PDO::PARAM_STR);
-
-				$stmt1->bindParam(':address_2', $_POST['add2'], PDO::PARAM_STR);
-				
-				$stmt1->bindParam(':area', $_POST['area'], PDO::PARAM_STR);
-				
-				$stmt1->bindParam(':landmark', $_POST['landmark'], PDO::PARAM_STR);
-
-				$stmt1->bindParam(':city', $_POST['city'], PDO::PARAM_STR);
-
-				$stmt1->bindParam(':post_code', $_POST['zipcode'], PDO::PARAM_STR);
-
-				$stmt1->bindParam(':sts_flg', $sts_flg, PDO::PARAM_STR);
-
-				$stmt1->bindParam(':cre_ts', $cre_ts, PDO::PARAM_STR);	
-
-			
-
-			
-
-			/*** execute the prepared statement ***/
-
-				$stmt1->execute();
-
-				 $custId = $DBH->lastInsertId();
-
-				//print_r($custId);
-
-		# custaddr
-
-			/*** bind the parameters ***/	
-
-		
-
-				//foreach($stocks as $stock)
-
-				//{
-
-					$stmt2->bindParam(':cust_code', $custId, PDO::PARAM_STR);
-
-					$stmt2->bindParam(':add1', $_POST['add1'], PDO::PARAM_STR);
-
-					$stmt2->bindParam(':add2', $_POST['add2'], PDO::PARAM_STR);
-					
-					$stmt2->bindParam(':area', $_POST['area'], PDO::PARAM_STR);
-				
-					$stmt2->bindParam(':landmark', $_POST['landmark'], PDO::PARAM_STR);
-
-					$stmt2->bindParam(':city', $_POST['city'], PDO::PARAM_STR);
-
-					$stmt2->bindParam(':zipcode', $_POST['zipcode'], PDO::PARAM_STR);
-
-					$stmt2->bindParam(':cre_ts', $cre_ts, PDO::PARAM_STR);
-
-				/*** execute the prepared statement ***/
-
-					$stmt2->execute();
-
-					$custaddId = $DBH->lastInsertId();
-
-				//print_r($custaddId);
-
-			}	
-
-			else
-
-			{		
-
-			$custaddr = "UPDATE customer_address SET add1='$add1',add2='$add2', area='$area', landmark='$landmark', city='$city',zipcode='$zipcode',cre_ts='$cre_ts' WHERE cust_code='$custId' ";
-
-			$stmt2 = $DBH->prepare($custaddr);
-
-			$stmt2->execute();
-
-			}
-
-			$orderheader = "INSERT INTO order_headers(
-
+        //foreach($stocks as $stock)
+        //{
+        $stmt2->bindParam(':cust_code', $custId, PDO::PARAM_STR);
+        $stmt2->bindParam(':add1', $_POST['add1'], PDO::PARAM_STR);
+        $stmt2->bindParam(':add2', $_POST['add2'], PDO::PARAM_STR);
+        $stmt2->bindParam(':area', $_POST['area'], PDO::PARAM_STR);
+        $stmt2->bindParam(':landmark', $_POST['landmark'], PDO::PARAM_STR);
+        $stmt2->bindParam(':city', $_POST['city'], PDO::PARAM_STR);
+        $stmt2->bindParam(':zipcode', $_POST['zipcode'], PDO::PARAM_STR);
+        $stmt2->bindParam(':cre_ts', $cre_ts, PDO::PARAM_STR);
+        /*         * * execute the prepared statement ** */
+        $stmt2->execute();
+        $custaddId = $DBH->lastInsertId();
+        //print_r($custaddId);
+    } else {
+        $custaddr = "UPDATE customer_address SET add1='$add1',add2='$add2', area='$area', landmark='$landmark', city='$city',zipcode='$zipcode',cre_ts='$cre_ts' WHERE cust_code='$custId' ";
+        $stmt2 = $DBH->prepare($custaddr);
+        $stmt2->execute();
+    }
+    $orderheader = "INSERT INTO order_headers(
 				cust_code,
 				order_value,
 				order_status,
@@ -292,8 +161,7 @@ $email = $_POST['email'];
 				:delivery_time,
 				:grand_total,
 				:cre_ts)";
-
-			$orderdetail = "INSERT INTO order_details(
+    $orderdetail = "INSERT INTO order_details(
 				cust_code,
 				order_number,
 				product_code,
@@ -309,146 +177,121 @@ $email = $_POST['email'];
 				:price,
 				:sub_total,
 				:cre_ts)";
-
-			/*** prepare the SQL statement ***/
-				$stmt3 = $DBH->prepare($orderheader);
-				$stmt4 = $DBH->prepare($orderdetail);
-		
-		# orderheader
-
-			/*** bind the parameters ***/	
-
-				//foreach($prices as $price)
-				//{
-					$orderTotal =$_POST['orderTotal'];
-					$vatPercent =$list[0]['VAT'];
-					//$delivery_charge =$list[0]['delivery_chrg'];
-					$delivery_charge =$_POST['delivery_charge'];
-					$delivery_time=$_POST['delivery_time'];
-					$deliveryType=$_POST['deliveryType'];
-					print_r($deliveryType);
-					if(deliveryType == "2")
-					{
-						$delivery_time = $_POST['delivery_time'];
-						$delivery_date = $_POST['delivery_date'];			
-					}
-					else
-					{
-						
-						$delivery_date= date("Y-m-d");
-						$delivery_time= date('H:i:s', (time()+(2*60*60)));
-					};
-					//$newdelivery_date= date("Y-m-d");					
-					//$delivery_time1= date('H:i:s', (time()+(2*60*60)));
-					
-					$order_number=$_POST['order_number'];
-					$vat_amount = ($list[0]['VAT'] / 100) * $orderTotal;
-					$grand_total =$orderTotal +$delivery_charge +$vat_amount;
-					$tot=$orderTotal +$delivery_charge;
-					$status = "Pending";
-					$p_type =$_POST['paym'];
-
-					$stmt3->bindParam(':order_value', $orderTotal, PDO::PARAM_STR);
-					$stmt3->bindParam(':cust_code', $custId, PDO::PARAM_STR);
-					$stmt3->bindParam(':order_status', $status, PDO::PARAM_STR);
-					$stmt3->bindParam(':payment_type',$p_type , PDO::PARAM_STR);
-					$stmt3->bindParam(':delivery_date', $delivery_date, PDO::PARAM_STR);
-					$stmt3->bindParam(':delivery_address', $delivery_address, PDO::PARAM_STR);
-					$stmt3->bindParam(':order_datetime', $cre_ts, PDO::PARAM_STR);
-					$stmt3->bindParam(':sub_total', $orderTotal, PDO::PARAM_STR);
-					$stmt3->bindParam(':vat_percent', $vatPercent, PDO::PARAM_STR);
-					$stmt3->bindParam(':vat_amount', $vat_amount, PDO::PARAM_STR);
-					$stmt3->bindParam(':delivery_charge', $delivery_charge, PDO::PARAM_STR);
-					$stmt3->bindParam(':delivery_time', $delivery_time, PDO::PARAM_STR);
-					$stmt3->bindParam(':grand_total', $grand_total, PDO::PARAM_STR);
-					//$stmt2->bindParam(':sts_flg', $sts_flg, PDO::PARAM_STR);
-					$stmt3->bindParam(':cre_ts', $cre_ts, PDO::PARAM_STR);
-
-				/*** execute the prepared statement ***/
-
-					$stmt3->execute();
-					$orderId = $DBH->lastInsertId();
-				//}
-		# orderdetail
-
-			/*** bind the parameters ***/	
-					$products = substr($_POST['products'], 1);
-					$qtys = substr($_POST['qtys'], 1);
-					$prices = substr($_POST['prices'], 1);
-					$totalPrices = substr($_POST['totalPrices'], 1);
-					$products = explode (",",$products);
-					$qtys =explode(",",$qtys);
-					$prices =explode(",",$prices);
-					$totalPrices =explode(",",$totalPrices);
-					$i=0;
-					foreach ($products as $pid) 
-						{
-					$stmt4->bindParam(':order_number', $orderId, PDO::PARAM_STR);
-					$stmt4->bindParam(':cust_code', $custId, PDO::PARAM_STR);
-					$stmt4->bindParam(':product_code', $pid, PDO::PARAM_STR);
-					$stmt4->bindParam(':quantity', $qtys[$i], PDO::PARAM_STR);
-					$stmt4->bindParam(':price', $prices[$i], PDO::PARAM_STR);
-					$stmt4->bindParam(':sub_total', $totalPrices[$i], PDO::PARAM_STR);
-					//$stmt2->bindParam(':sts_flg', $sts_flg, PDO::PARAM_STR);
-					$stmt4->bindParam(':cre_ts', $cre_ts, PDO::PARAM_STR);
-				/*** execute the prepared statement ***/
-					$stmt4->execute();
-
-					$sql = "SELECT * FROM products  where product_code='$pid' LIMIT 0, 1";
-					$query = $DBH->prepare($sql);
-					$query->execute();
-					$list1 = $query->fetchAll();
-					$messagepre .= '
+    /*     * * prepare the SQL statement ** */
+    $stmt3 = $DBH->prepare($orderheader);
+    $stmt4 = $DBH->prepare($orderdetail);
+    # orderheader
+    /*     * * bind the parameters ** */
+    //foreach($prices as $price)
+    //{
+    $orderTotal = $_POST['orderTotal'];
+    $vatPercent = $list[0]['VAT'];
+    //$delivery_charge =$list[0]['delivery_chrg'];
+    $delivery_charge = $_POST['delivery_charge'];
+    $delivery_time = $_POST['delivery_time'];
+    $deliveryType = $_POST['deliveryType'];
+    print_r($deliveryType);
+    if (deliveryType == "2") {
+        $delivery_time = $_POST['delivery_time'];
+        $delivery_date = $_POST['delivery_date'];
+    } else {
+        $delivery_date = date("Y-m-d");
+        $delivery_time = date('H:i:s', (time() + (2 * 60 * 60)));
+    };
+    //$newdelivery_date= date("Y-m-d");					
+    //$delivery_time1= date('H:i:s', (time()+(2*60*60)));
+    $order_number = $_POST['order_number'];
+    $vat_amount = ($list[0]['VAT'] / 100) * $orderTotal;
+    $grand_total = $orderTotal + $delivery_charge + $vat_amount;
+    $tot = $orderTotal + $delivery_charge;
+    $status = "Pending";
+    $p_type = $_POST['paym'];
+    $stmt3->bindParam(':order_value', $orderTotal, PDO::PARAM_STR);
+    $stmt3->bindParam(':cust_code', $custId, PDO::PARAM_STR);
+    $stmt3->bindParam(':order_status', $status, PDO::PARAM_STR);
+    $stmt3->bindParam(':payment_type', $p_type, PDO::PARAM_STR);
+    $stmt3->bindParam(':delivery_date', $delivery_date, PDO::PARAM_STR);
+    $stmt3->bindParam(':delivery_address', $delivery_address, PDO::PARAM_STR);
+    $stmt3->bindParam(':order_datetime', $cre_ts, PDO::PARAM_STR);
+    $stmt3->bindParam(':sub_total', $orderTotal, PDO::PARAM_STR);
+    $stmt3->bindParam(':vat_percent', $vatPercent, PDO::PARAM_STR);
+    $stmt3->bindParam(':vat_amount', $vat_amount, PDO::PARAM_STR);
+    $stmt3->bindParam(':delivery_charge', $delivery_charge, PDO::PARAM_STR);
+    $stmt3->bindParam(':delivery_time', $delivery_time, PDO::PARAM_STR);
+    $stmt3->bindParam(':grand_total', $grand_total, PDO::PARAM_STR);
+    //$stmt2->bindParam(':sts_flg', $sts_flg, PDO::PARAM_STR);
+    $stmt3->bindParam(':cre_ts', $cre_ts, PDO::PARAM_STR);
+    /*     * * execute the prepared statement ** */
+    $stmt3->execute();
+    $orderId = $DBH->lastInsertId();
+    //}
+    # orderdetail
+    /*     * * bind the parameters ** */
+    $products = substr($_POST['products'], 1);
+    $qtys = substr($_POST['qtys'], 1);
+    $prices = substr($_POST['prices'], 1);
+    $totalPrices = substr($_POST['totalPrices'], 1);
+    $products = explode(",", $products);
+    $qtys = explode(",", $qtys);
+    $prices = explode(",", $prices);
+    $totalPrices = explode(",", $totalPrices);
+    $i = 0;
+    foreach ($products as $pid) {
+        $stmt4->bindParam(':order_number', $orderId, PDO::PARAM_STR);
+        $stmt4->bindParam(':cust_code', $custId, PDO::PARAM_STR);
+        $stmt4->bindParam(':product_code', $pid, PDO::PARAM_STR);
+        $stmt4->bindParam(':quantity', $qtys[$i], PDO::PARAM_STR);
+        $stmt4->bindParam(':price', $prices[$i], PDO::PARAM_STR);
+        $stmt4->bindParam(':sub_total', $totalPrices[$i], PDO::PARAM_STR);
+        //$stmt2->bindParam(':sts_flg', $sts_flg, PDO::PARAM_STR);
+        $stmt4->bindParam(':cre_ts', $cre_ts, PDO::PARAM_STR);
+        /*         * * execute the prepared statement ** */
+        $stmt4->execute();
+        $sql = "SELECT * FROM products  where product_code='$pid' LIMIT 0, 1";
+        $query = $DBH->prepare($sql);
+        $query->execute();
+        $list1 = $query->fetchAll();
+        $messagepre .= '
 					<tr>
-        				<td>'.$list1[0]['product_name'].'</td>
-						<td> '.$qtys[$i].' kg</td>
-						<td><strong>&#8377; '.$totalPrices[$i].'</strong></td>
+        				<td>' . $list1[0]['product_name'] . '</td>
+						<td> ' . $qtys[$i] . ' kg</td>
+						<td><strong>&#8377; ' . $totalPrices[$i] . '</strong></td>
 					  </tr>
 					
 					';
-					$i++;
+        $i++;
+    }
+    //}	
+    $msg = "Thank you, " . $name . " \n Your order (#" . $orderId . ") has been successfully placed.";
+    //$DBH->commit();
 
-						}
-
-				//}	
-
-			$msg="Thank you, ".$name." \n Your order (#".$orderId.") has been successfully placed.";
-
-			//$DBH->commit();
-
-
-
-			$output = array("msg"=>$msg);
-			$to = $email ;
-			$subject = 'Your order detail';
-
-	// Always set content-type when sending HTML email
-			$headers .= "MIME-Version: 1.0\r\n";
-			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-	// More headers
-			$headers .= 'From: <sales@onlymeat.in>' . "\r\n";
-			$headers = "From: <sales@onlymeat.in>" . "\r\n";
-			$headers .= "Reply-To:  <sales@onlymeat.in>" . "\r\n";
-			$headers .= 'Cc: kris@mapicos.com' . "\r\n";
-			//$headers .= "CC: sales@onlymeat.in\r\n";
-			$headers .= "MIME-Version: 1.0\r\n";
-			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-		
-			$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    $output = array("msg" => $msg);
+    $to = $email;
+    $subject = 'Your order detail';
+    // Always set content-type when sending HTML email
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+    // More headers
+    $headers .= 'From: <sales@onlymeat.in>' . "\r\n";
+    $headers = "From: <sales@onlymeat.in>" . "\r\n";
+    $headers .= "Reply-To:  <sales@onlymeat.in>" . "\r\n";
+    $headers .= 'Cc: kris@mapicos.com' . "\r\n";
+    //$headers .= "CC: sales@onlymeat.in\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+    $message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 			<html xmlns="http://www.w3.org/1999/xhtml">
 			<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 			<title>Order Confirmation - Your Order with Onlymeat.in [#404-0232994-4273140] has been successfully placed!</title>
 			<link href="http://www.ayushmantechnology.com/onlymeat/css/order.css" rel="stylesheet" type="text/css" />
 
-
 			</head><body style="
 				margin-top: 0px;
 				margin-bottom: 0px;
 				font-family: "zonaprouploaded_file";
 			">';
-			 $message .= '<div id="main" style="height: 1400px;
+    $message .= '<div id="main" style="height: 1400px;
 				width: 720px;
 				margin-right: auto;
 				margin-left: auto;
@@ -478,7 +321,7 @@ $email = $_POST['email'];
 				margin-right: 64px;"></div>
 			  </div>
 			';
-			 $message .= '<div id="order-number" style="height: 70px;
+    $message .= '<div id="order-number" style="height: 70px;
 				width: 720px;"><div id="order-num" style="float: right;
 				height: 50px;
 				width: 350px;
@@ -494,10 +337,9 @@ $email = $_POST['email'];
 				color: #666666;
 				font-weight: 400;
 				margin-bottom: 10px;
-				margin-top: 25px;">Order <font color="#e3000f">#'.$orderId.'</font></h3>
+				margin-top: 25px;">Order <font color="#e3000f">#' . $orderId . '</font></h3>
 				</div></div>';
- 
-			$message .= '<div id="welcome-text" style="    height: auto;
+    $message .= '<div id="welcome-text" style="    height: auto;
 				width: 660px;
 				float: left;
 				padding-right: 30px;
@@ -508,7 +350,7 @@ $email = $_POST['email'];
 				color: #E3000F;
 				text-transform: capitalize;
 				margin-bottom: 5px;
-				margin-top: 0px;">Hello '.$name.',</h5>
+				margin-top: 0px;">Hello ' . $name . ',</h5>
 				<p style="font-size: 14px;
 				color: #666;
 				margin-top: 0px;
@@ -519,7 +361,7 @@ $email = $_POST['email'];
 				please Call us on <font color="#e3000f"><strong>+91-94 93 92 25 25</strong></font>.
 				</p>
 			  </div>';
-			$message .= '  <div id="order-detailes" style="height: auto;
+    $message .= '  <div id="order-detailes" style="height: auto;
 				width: 660px;
 				float: left;
 				background-color: #E6E7E8;
@@ -545,7 +387,7 @@ $email = $_POST['email'];
 				margin-bottom: 15px;
 				line-height: 20px;
 				margin-top: 10px;
-				font-weight: normal;">Order ID <font color="#e3000f">#'.$orderId.'</font>  |  Placed on:'.$newdelivery_date.'</h6><table width="660" border="1" class="hovertable" style="font-size: 14px;
+				font-weight: normal;">Order ID <font color="#e3000f">#' . $orderId . '</font>  |  Placed on:' . $newdelivery_date . '</h6><table width="660" border="1" class="hovertable" style="font-size: 14px;
 				color: #333333;
 				border-width: 0px;
 				border-color: #E3000F;
@@ -556,10 +398,10 @@ $email = $_POST['email'];
 					<td width="94"><strong>Quantity</strong></td>
 					<td width="96"><strong>Price</strong></td>
 				  </tr>
-				  '.$messagepre.'
-				</table></div>'; 
-			 $subtot=$orderTotal-$delivery_charge;
-			$message .= '
+				  ' . $messagepre . '
+				</table></div>';
+    $subtot = $orderTotal - $delivery_charge;
+    $message .= '
 			 <div id="order-total" style="height: auto;
 				width: 660px;
 				float: left;
@@ -583,22 +425,21 @@ $email = $_POST['email'];
 					  <tr>
 						<td width="66%">Item Subtotal</td>
 						<td width="9%">:</td>
-						<td width="25%"><strong>&#8377; '.$subtot.'</strong></td>
+						<td width="25%"><strong>&#8377; ' . $subtot . '</strong></td>
 					</tr>
 					  <tr>
 						<td>Delivery Charges</td>
 						<td>:</td>
-						<td><strong>&#8377; '.$delivery_charge.'</strong></td>
+						<td><strong>&#8377; ' . $delivery_charge . '</strong></td>
 					</tr>
 					  <tr>
 						<td><strong>Order Total</strong></td>
 						<td>:</td>
-						<td><strong>&#8377; '.$orderTotal.'</strong></td>
+						<td><strong>&#8377; ' . $orderTotal . '</strong></td>
 					</tr>    	  
 				  </table>
 				</div>';
- 
-			$message .= '<div id="order-delivery" style="height: auto;
+    $message .= '<div id="order-delivery" style="height: auto;
 				width: 660px;
 				float: left;
 				padding-top: 19px;
@@ -631,16 +472,16 @@ $email = $_POST['email'];
 				color: #333333;
 				border-width: 0px;">
 					  <tr>
-						<td width="31%"><strong>'.$name.'</strong></td>
+						<td width="31%"><strong>' . $name . '</strong></td>
 						<td width="6%"><strong>:</strong></td>
-						<td width="63%"><strong>'.$_POST['mobile_number1'].'</strong></td>
+						<td width="63%"><strong>' . $_POST['mobile_number1'] . '</strong></td>
 					  </tr>
 					  <tr>
 						<td colspan="3">
-					   '.$delivery_address.'</td>
+					   ' . $delivery_address . '</td>
 					  </tr>
 					  <tr>
-						<td colspan="3"><strong>Scheduled Delivery : '.$_POST['delivery_date'].' - '.$delivery_time.'</strong></td>
+						<td colspan="3"><strong>Scheduled Delivery : ' . $_POST['delivery_date'] . ' - ' . $delivery_time . '</strong></td>
 					  </tr>
 				  </table>
 				</div>
@@ -651,8 +492,7 @@ $email = $_POST['email'];
 				background-repeat: no-repeat;
 				background-position: center center;"></div>
 			  </div>';
- 
-			$message .= ' <div id="process" style="    height: auto;
+    $message .= ' <div id="process" style="    height: auto;
 				width: 660px;
 				float: left;
 				padding-top: 19px;
@@ -677,8 +517,7 @@ $email = $_POST['email'];
 				padding-bottom: 0px;
 				color: #333;
 			"><div id="top-header"></div>';
-
-			$message .= '<div id="notify-text" style="height: auto;
+    $message .= '<div id="notify-text" style="height: auto;
 				width: 660px;
 				float: left;
 				padding-right: 30px;
@@ -690,11 +529,9 @@ $email = $_POST['email'];
 				Need to make changes to your order? please Call us on <font color="#e3000f"><strong>+91-94 93 92 25 25</strong></font><br/><br/>
 				We hope to see you again soon.
 			  </div>';
-
-			  $message .= '<div id="fresh-by-order" style="height: auto;
+    $message .= '<div id="fresh-by-order" style="height: auto;
 				width: 660px;
 				float: left;
-
 				padding-right: 30px;
 				padding-left: 30px;
 				padding-top: 20px;
@@ -736,18 +573,13 @@ $email = $_POST['email'];
 			  </div>
 			</div>';
 
-
-			$message .= '</body></html>';
-				mail($to,$subject,$message,$headers);
-
-	echo json_encode($output);
-
-			//header("Location: $produ_a_redirect?insertkey=$orderId");
-	 	}
-		catch(PDOException $e) {
-
-			//$DBH->rollBack();
-			echo json_encode(array('msg'=>"I'm sorry, I'm afraid I can't do that."));
-			file_put_contents('PDOErrors.txt',"\r\n".date("Y-m-d H:i:s"). $e->getMessage(), FILE_APPEND);
-		}
+    $message .= '</body></html>';
+    mail($to, $subject, $message, $headers);
+    echo json_encode($output);
+    //header("Location: $produ_a_redirect?insertkey=$orderId");
+} catch (PDOException $e) {
+    //$DBH->rollBack();
+    echo json_encode(array('msg' => "I'm sorry, I'm afraid I can't do that."));
+    file_put_contents('PDOErrors.txt', "\r\n" . date("Y-m-d H:i:s") . $e->getMessage(), FILE_APPEND);
+}
 ?>
