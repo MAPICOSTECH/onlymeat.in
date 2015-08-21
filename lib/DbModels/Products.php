@@ -2,7 +2,7 @@
 
 namespace DbModels;
 
-class ProductDetails {
+class Products {
 
     public function __construct() {
         global $_DB;
@@ -12,6 +12,13 @@ class ProductDetails {
     public function getAllProductDetails() {
         $sql = "select * from products where status = ?";
         $params = ['1'];
+        $this->_db->sqlQuery($sql, $params);
+        return $this->_db->result;
+    }
+
+    public function getProductDetails($productID) {
+        $sql = "SELECT * FROM products  where product_code=? LIMIT 0, 1";
+        $params=[$productID];
         $this->_db->sqlQuery($sql, $params);
         return $this->_db->result;
     }

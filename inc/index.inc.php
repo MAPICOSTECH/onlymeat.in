@@ -1,7 +1,7 @@
 <?php
 
-include('scripts.php');
+include('lib/scripts.php');
 
-$productsDb=new \DbModels\ProductDetails();
+$productsDb=new \DbModels\Products();
 
 $productsList =$productsDb->getAllProductDetails();

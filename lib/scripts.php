@@ -1,9 +1,10 @@
 <?php
 
-require('db_config.php');
+require('app_config.php');
 
-require('Helpers/loader.php');
-require('DbModels/loader.php');
+require('lib/Helpers/loader.php');
+require('lib/DbModels/loader.php');
+require('lib/OnlyMeatHelpers/loader.php');
 
 
 //connect to db

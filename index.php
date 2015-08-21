@@ -6,16 +6,8 @@ include('inc/index.inc.php');
 <html lang="en">
     <head>
         <meta charset="utf-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <title>Onlymeat</title>
-
-        <script type="text/javascript">
-            document.createElement("nav");
-            document.createElement("section");
-            document.createElement("footer");
-        </script>
+        <title>Only Meat</title>
 
         <link href="css/style.css" rel="stylesheet" type="text/css">
         <link href="css/responsive.css" rel="stylesheet" type="text/css">
@@ -149,23 +141,24 @@ include('inc/index.inc.php');
                                     <div class="table_last_prt">
                                         <h5>Delivery Options</h5>
                                         <div class="rad">
-                                            <input type="radio" name="deliverytime" id="deliverytime1"  value="1" checked onClick="delivaryalert();"/>
-                                            Delivery Now
+                                            <label> <input type="radio" name="deliverytime" id="deliverytime1"  value="1" checked onClick="delivaryalert();"/>
+                                                Delivery Now</label>
                                         </div>
                                         <div class="rad">
-                                            <input type="radio" name="deliverytime" id="deliverytime2" checked value="2" />
-                                            Scheduled Delivery
+                                            <label><input type="radio" name="deliverytime" id="deliverytime2" checked value="2" />
+                                                Scheduled Delivery</label>
                                         </div>
 
 
                                         <div class="date">
                                             <div class="styled-select">
-                                                <input type="text" name="delivery_date" id="delivery_date"  placeholder="Delivery Date" class="ccformfield" value="<?php //echo date('m/d/Y');          ?>">
+                                                <input type="text" name="delivery_date" id="delivery_date"  placeholder="Delivery Date" class="ccformfield" value="<?php echo date('m/d/Y');           ?>">
 
                                             </div>
                                             <div class="styled-select">
                                                 <select id="ord_slot" name="ord_slot"   class="cd-select">
-                                                    <option value="09:00AM" selected>7AM - 9AM </option>
+                                                    <option value="">Select  time</option>
+                                                    <option value="09:00AM">7AM - 9AM </option>
                                                     <option value="11:00AM" >9AM - 11AM </option>
                                                     <option value="01:00PM" >11AM - 1PM </option>
                                                     <option value="06:00PM" >4PM - 6PM </option>
@@ -203,7 +196,7 @@ include('inc/index.inc.php');
 
                                             <div class="form_1 ccfield-prepend">
                                                 <label><img src="images/frm_pic2.jpg" alt="" /></label>
-                                                <input  type="text" placeholder="First Name" name="Name" id="first_name" required >
+                                                <input  type="text" placeholder="Name" name="Name" id="first_name" required >
                                             </div>
                                             <div class="form_1 ccfield-prepend">
                                                 <label><img src="images/frm_pic1.jpg" alt="" /></label>
@@ -215,11 +208,11 @@ include('inc/index.inc.php');
                                             </div>
                                             <div class="form_1 ccfield-prepend">
                                                 <label><img src="images/frm_pic4.jpg" alt="" /></label>
-                                                <input  type="text" placeholder="Addressline 1" name="add1" id="add1" required >
+                                                <input  type="text" placeholder="Address line 1" name="add1" id="add1" required >
                                             </div>
                                             <div class="form_1 ccfield-prepend ">
                                                 <label><img src="images/frm_pic4.jpg" alt="" /></label>
-                                                <input  type="text" placeholder="Addressline 2" name="add2" id="add2"  >
+                                                <input  type="text" placeholder="Address line 2" name="add2" id="add2"  >
                                             </div>
                                             <div class="form_1 ccfield-prepend ">
                                                 <label><img src="images/frm_pic4.jpg" alt="" /></label>
@@ -259,7 +252,7 @@ include('inc/index.inc.php');
 
                                                 <input type="hidden" name="delivery_charge" id="delivery_charge" value="25.00">
 
-                                                <input type="submit" name="submit" id="f_login" value="Login" style="align:left"><br> 
+                                                <input type="button" name="f_login" id="f_login" value="Login" style="align:left"><br> 
                                             </div>
                                         </div>
                                     </div>
@@ -278,7 +271,7 @@ include('inc/index.inc.php');
 
                                             <input type="hidden" name="order_number" id="order_number" value="<?php echo $orderid = mt_rand(); ?>">
                                             <input type="hidden" name="isExisting" id="isExisting" value="No">
-                                            <input type="submit" value="submit!" id="f_submit" name="submit" />
+                                            <input type="submit" value="Order" id="f_submit" name="submit" />
 
                                         </div>
                                     </div>
@@ -293,8 +286,8 @@ include('inc/index.inc.php');
                 <div class="footer_col">
                     <h3>Payment Method</h3>
                     <ul class="str_sm">
-                        <li><a href="#"><img src="images/cash.png"></a></li>
-                        <li><a href="#"><img src="images/mswipe.png"></a></li>
+                        <li><img src="images/cash.png"></li>
+                        <li><a href="https://www.mswipe.com/"><img src="images/mswipe.png"></a></li>
                     </ul>
                 </div>
                 <div class="footer_col">
@@ -322,14 +315,13 @@ include('inc/index.inc.php');
         </footer>	
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script src="js/index.js" type="text/javascript"></script>
 
         <script src="js/vendor/wow.js"></script>
         <script src="js/vendor/webfontloader.js"></script>
         <script src="js/default.js"></script>
-        <script src="js/custom.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <link rel="stylesheet" href="css/jquery-ui.css">
 
 
